@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: victim
+  namespace: default
+spec:
+  containers:
+  - name: victim
+    image: python:slim
+    command: ["sleep", "infinity"]
+    env:
+    - name: SECRET_API_KEY
+      value: "super-secret-key-12345"
+    - name: DATABASE_PASSWORD
+      value: "production-db-password"
