@@ -86,6 +86,8 @@ Instead of patching the old `nodes/proxy` mechanism, Kubernetes is introducing "
 This feature is a upcoming feature in Kubernetes v1.36 (April 2026). 
 As this lab targets standard, widely-deployed Kubernetes environments, solution is to remove the permission or use hardened kubernetes runtime like Edera.
 
+Source: https://edera.dev/stories/your-monitoring-stack-just-became-a-rce-vector-a-deep-dive-into-the-kubernetes-nodes-proxy-rce
+
 
 ## 6. Resources used
 
