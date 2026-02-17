@@ -1,7 +1,4 @@
-Requires tool: https://github.com/vi/websocat 
-Comes precompiled for x86 in this repo.
-
-# Kubernetes Node Proxy Lab (Privilege Escalation)
+# Kubernetes Node Proxy Lab
 
 ## 1. Project Overview
 
@@ -19,7 +16,7 @@ This mini-lab demonstrates a Kubernetes RBAC vulnerability involving the `nodes/
 
 * **Docker:** Must be installed and running (required for Kind).
 * **Git:** To clone this repository.
-* **Websocat** to use the exploit script and interact with the vulnerable pod using websockets.
+* **Websocat** to use the exploit script and interact with the vulnerable pod using websockets. https://github.com/vi/websocat 
 
 ---
 
