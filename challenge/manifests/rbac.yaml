@@ -9,11 +9,9 @@ kind: ClusterRole
 metadata:
   name: monitor-role
 rules:
-# Allow listing pods to find the target
 - apiGroups: [""]
   resources: ["pods", "nodes"]
   verbs: ["get", "list"]
-# THE VULNERABILITY: Allow proxying to nodes
 - apiGroups: [""]
   resources: ["nodes/proxy"]
   verbs: ["get", "create"]

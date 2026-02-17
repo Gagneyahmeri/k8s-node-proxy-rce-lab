@@ -10,12 +10,7 @@ spec:
   - name: db
     image: python:3.9-slim
     command: ["/bin/sh", "-c"]
-    # Create the flag and start a fake server
-    args:
-      - |
-        echo "CTF{N0D3_PR0Xy}" > /root/flag.txt;
-        echo "Database started. Listening on 3306...";
-        python3 -m http.server 3306;
+    args: ["echo 'CTF{N0D3_PR0Xy}' > /root/flag && echo 'Flag Created' && python3 -m http.server 3306"]
     ports:
     - containerPort: 3306
       name: http
