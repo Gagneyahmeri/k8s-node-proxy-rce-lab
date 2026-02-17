@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: victim-db
+  namespace: default
+  labels:
+    app: sensitive-data
+spec:
+  containers:
+  - name: db
+    image: python:3.9-slim
+    command: ["/bin/sh", "-c"]
+    # Create the flag and start a fake server
+    args:
+      - |
+        echo "CTF{N0D3_PR0Xy}" > /root/flag.txt;
+        echo "Database started. Listening on 3306...";
+        python3 -m http.server 3306;
+    ports:
+    - containerPort: 3306
+      name: http

@@ -6,10 +6,12 @@ metadata:
 spec:
   containers:
   - name: victim
-    image: python:slim
+    image: python:3.9-slim
+    # We need this to keep the container running
     command: ["sleep", "infinity"]
+    ports:
+    - containerPort: 9100
+      name: metrics
     env:
     - name: SECRET_API_KEY
       value: "super-secret-key-12345"
-    - name: DATABASE_PASSWORD
-      value: "production-db-password"
