@@ -34,9 +34,6 @@ k8s-node-proxy-lab/
 │   ├── run_vuln.sh         # Deploys vulnerable RBAC & Victim
 │   ├── exploit.sh          # Proof-of-Concept Exploit (Reads Flag)
 │   └── Better_exploit.sh   # Advanced Exploit (Accepts arguments)
-├── secure/                 # [Scenario B] The Fix
-│   ├── run.sh              # Deploys secure RBAC
-│   └── verify.sh           # Verifies that exploit fails
 ├── challenge/              # [Bonus] CTF Mode
 │   └── deploy.sh           # Generates 'player.kubeconfig'
 └── solution/               # [Bonus] Answer Key
@@ -52,7 +49,7 @@ Run the setup script to initialize the environemnt. Setup script will download n
 
 **Step 2: Vulnerable scenario**
 
-You can run vulnerable or secure scenario by going into that spesific folder and running the script inside the folder.
+You can run vulnerable by going into folder and running the script inside the folder.
 ```
 cd vulnerable
 ./run_vuln.sh
@@ -74,6 +71,23 @@ cd ../challenge
 ```
 
 ## 5. Technical details
+
+## 6. Mitigations
+
+You might wonder why Kubernetes allows `nodes/proxy` to bypass namespace restrictions by default. The Kubernetes Security Team has determined this is "Working as Intended" for architectural reasons.
+
+### The Problem
+Patching `nodes/proxy` to inspect the sub-path (e.g., blocking `/exec` but allowing `/metrics`) would require the API Server to parse and understand HTTP streams intended for the Kubelet.
+
+### The Future Solution (KEP-2862)
+Instead of patching the old `nodes/proxy` mechanism, Kubernetes is introducing "Fine-Grained Kubelet API Authorization (KEP-2862)".
+* **Current State:** We grant `nodes/proxy` (ALL access).
+* **Future State (v1.36+):** We will grant `nodes/metrics`, `nodes/stats`, or `nodes/log`.
+* **Result:** Monitoring tools will get exactly what they need without ever having access to `nodes/exec`.
+
+**Why KEP-2862 was not used in this lab:**
+This feature is a upcoming feature in Kubernetes v1.36 (April 2026). 
+As this lab targets standard, widely-deployed Kubernetes environments, solution is to remove the permission or use hardened kubernetes runtime like Edera.
 
 
 ## 6. Resources used
