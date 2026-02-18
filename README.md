@@ -24,16 +24,15 @@ This mini-lab demonstrates a Kubernetes RBAC vulnerability involving the `nodes/
 
 ```text
 k8s-node-proxy-lab/
-├── bin/                    # Binaries (kind, kubectl, websocat) are downloaded here
+├── bin/                    # Binaries (kind, kubectl) are downloaded here
 ├── setup.sh                # 1. Starts Cluster & Installs Tools
 ├── teardown.sh             # 4. Deletes Cluster
-├── vulnerable/             # [Scenario A] The Exploit
+├── vulnerable/             # Run the vulnerable pod example
 │   ├── run_vuln.sh         # Deploys vulnerable RBAC & Victim
-│   ├── exploit.sh          # Proof-of-Concept Exploit (Reads Flag)
+│   ├── exploit.sh          # Proof-of-Concept Exploit
 │   └── Better_exploit.sh   # Advanced Exploit (Accepts arguments)
-├── challenge/              # [Bonus] CTF Mode
-│   └── deploy.sh           # Generates 'player.kubeconfig'
-└── solution/               # [Bonus] Answer Key
+├── challenge/              # CTF game
+│   └── deploy.sh           # Generates CTF
     └── solve.sh            # Solves the CTF
 ```
 
