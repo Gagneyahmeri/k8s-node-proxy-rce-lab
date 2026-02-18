@@ -67,7 +67,38 @@ cd ../challenge
 ./deploy.sh
 ```
 
-## 5. Technical details
+## 5. CTF
+
+### The Scenario
+You have managed to steal a developer's kubeconfig file (`player.kubeconfig`). 
+This developer has very limited permissions, but they can list pods but cannot `exec` into them. However, their role is misconfigured with the `nodes/proxy` permission.
+
+**Your Goal:**
+1.  Use the restricted `player.kubeconfig` to inspect the cluster.
+2.  Locate the flag inside the pod `victim-db` (in `/root/flag`).
+3.  Bypass the `pods/exec` restriction using the `nodes/proxy` vulnerability to read the flag.
+
+### How to Play
+1.  **Deploy the Challenge:**
+    ```bash
+    cd challenge
+    ./deploy.sh
+    ```
+    This creates the victim pod and generates your `player.kubeconfig` file in the root directory
+
+2.  **Start Hacking:**
+    You must use **only** the `player.kubeconfig` file.
+    ```bash
+    # Check what you can see
+    kubectl --kubeconfig player.kubeconfig get pods
+
+    # Try to exec
+    kubectl --kubeconfig player.kubeconfig exec -it victim-db -- id
+    ```
+
+3.  **Solve It:**
+    Write a script or use `curl`/`websocat` to exploit the API Proxy and steal the flag!
+    Solution in solve.sh script.
 
 ## 6. Mitigations
 
